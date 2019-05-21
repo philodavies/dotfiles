@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/phil/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="robbyrussell"
@@ -15,39 +15,53 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 ## User configuration
-#Phil's functions
+## This section contains my settings :)
+## Phil Davies
+## May 21st, 2019
 
-#function to show which vi mode I am in.
-function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-    zle reset-prompt
-}
+## ZSH Theme 
+POWERLEVEL9K_MODE='nerdfont-complete'
+source  ~/dotfiles/zsh/powerlevel9k/powerlevel9k.zsh-theme
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
-function collapse_pwd {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-}
+## Ruby configs
+if which rbenv > /dev/null; then
+  eval "$(rbenv init -)"
+  export RUBYPATH=$HOME/.gem/ruby/2.3.0
+  export PATH=$PATH:$RUBYPATH/bin
+  source $(dirname $(gem which colorls))/tab_complete.sh
+fi
+
+## GO configs
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 #Phil's Aliases
 alias sudo="sudo -E"
 alias mkdir="mkdir -pv"
-
+alias ls=colorls
 
 #Phil's exports
 export KEYTIMEOUT=1
-export PROMPT="%{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}%15<..<%~%<<%#%{$reset_color%} "
-
 
 #Phil's custom settings
 #Set zsh in vi mode
 bindkey -v
 
-
-#This sets the prompt to show when I am in vi edit mode.
-RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-zle -N zle-line-init
-zle -N zle-keymap-select
-
+#Reverse search
+bindkey '^R' history-incremental-search-backward
 
 #Phil's dotfiles git alias
-alias config=/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME
+alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
+
+## Mac specific settings
+if [[ `uname` == "Darwin" ]]; then
+  ## Preferred editor for local and remote sessions
+  if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+  else
+    export EDITOR='mvim'
+  fi
+fi
