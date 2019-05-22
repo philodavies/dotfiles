@@ -1,3 +1,8 @@
+## TERM color setting
+## Must be at the top of the zshrc because it needs to be sourced before oh-my-zsh runs
+export TERM="xterm-256color"
+ZSH_TMUX_AUTOSTART='true'
+
 # Path to your oh-my-zsh installation.
   export ZSH=$HOME/.oh-my-zsh
 
@@ -10,6 +15,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  tmux
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -21,10 +27,13 @@ source $ZSH/oh-my-zsh.sh
 
 ## ZSH Theme 
 POWERLEVEL9K_MODE='nerdfont-complete'
-source  ~/dotfiles/zsh/powerlevel9k/powerlevel9k.zsh-theme
+source  ~/.dotfiles/zsh/powerlevel9k/powerlevel9k.zsh-theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+## Tmux config
+source ~/.bin/tmuxinator.zsh
 
 ## Ruby configs
 if which rbenv > /dev/null; then
@@ -32,6 +41,8 @@ if which rbenv > /dev/null; then
   export RUBYPATH=$HOME/.gem/ruby/2.3.0
   export PATH=$PATH:$RUBYPATH/bin
   source $(dirname $(gem which colorls))/tab_complete.sh
+
+  alias ls=colorls
 fi
 
 ## GO configs
@@ -41,7 +52,6 @@ export PATH=$PATH:$GOPATH/bin
 #Phil's Aliases
 alias sudo="sudo -E"
 alias mkdir="mkdir -pv"
-alias ls=colorls
 
 #Phil's exports
 export KEYTIMEOUT=1
@@ -65,3 +75,4 @@ if [[ `uname` == "Darwin" ]]; then
     export EDITOR='mvim'
   fi
 fi
+
