@@ -4,7 +4,7 @@ export TERM="xterm-256color"
 ZSH_TMUX_AUTOSTART='true'
 
 # Path to your oh-my-zsh installation.
-  export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="robbyrussell"
@@ -33,7 +33,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 ## Tmux config
-source ~/.bin/tmuxinator.zsh
+## Tmux config in part from: https://blogs.technet.microsoft.com/jessicadeen/linux/macos-ohmyzsh-tmux-vim-iterm2-powerlevel9k-badass-terminal/
+source ~/.dotfiles/tmux/tmuxinator.zsh
 
 ## Ruby configs
 if which rbenv > /dev/null; then
