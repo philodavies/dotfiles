@@ -53,6 +53,7 @@ export PATH=$PATH:$GOPATH/bin
 #Phil's Aliases
 alias sudo="sudo -E"
 alias mkdir="mkdir -pv"
+alias cls="clear"
 
 #Phil's exports
 export KEYTIMEOUT=1
@@ -76,4 +77,3 @@ if [[ `uname` == "Darwin" ]]; then
     export EDITOR='mvim'
   fi
 fi
-
