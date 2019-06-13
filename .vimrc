@@ -37,14 +37,13 @@ syntax on
 color slate
 
 
-
 " Set escape key to be noticed immediately
 set ttimeoutlen=0
 
 " Set lightline settings
 set laststatus=2
 
-let g:lightline = { 
+let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ }
 
@@ -64,3 +63,31 @@ nnoremap <C-P> :bprev<CR>
 " Set comment strings
 setglobal commentstring=#\ %s
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
+
+
+
+" Functions
+
+
+" Function to strip trailing whitespace and return to cursor location
+function! TrimWhite()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+
+
+
+" Autocommands
+
+
+" Write to file but remove all trailing whitespace before saving
+autocmd BufWrite * :call TrimWhite()
