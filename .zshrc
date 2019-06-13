@@ -1,7 +1,6 @@
 ## TERM color setting
 ## Must be at the top of the zshrc because it needs to be sourced before oh-my-zsh runs
 export TERM="xterm-256color"
-ZSH_TMUX_AUTOSTART='true'
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -74,6 +73,6 @@ if [[ `uname` == "Darwin" ]]; then
   if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
   else
-    export EDITOR='mvim'
+    export EDITOR='mvim -v'
   fi
 fi
