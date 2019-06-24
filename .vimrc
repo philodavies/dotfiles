@@ -91,3 +91,7 @@ endfunction
 
 " Write to file but remove all trailing whitespace before saving
 autocmd BufWrite * :call TrimWhite()
+
+
+" inoremaps go here
+inoremap { {<CR>}<Esc>ko
