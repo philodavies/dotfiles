@@ -19,6 +19,9 @@ Plug 'valloric/youcompleteme'
 " Code commenting
 Plug 'tpope/vim-commentary'
 
+" Golang plugin
+Plug 'fatih/vim-go'
+
 call plug#end()
 
 " tabs and indenting ------------------------------------------------------
@@ -60,10 +63,9 @@ nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
 
-" Set comment strings
-setglobal commentstring=#\ %s
-autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
-
+" Set Golang auto options
+let g:go_fmt_command = "goimports"
+let g:go_null_module_warning = 0
 
 
 
@@ -95,3 +97,4 @@ autocmd BufWrite * :call TrimWhite()
 
 " inoremaps go here
 inoremap { {<CR>}<Esc>ko
+inoremap ( ()<Esc>ba

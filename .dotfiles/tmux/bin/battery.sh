@@ -8,13 +8,13 @@ current_charge=$(echo $battery_info | grep -o '[0-9]\+%' | awk '{sub (/%/, "", $
 if [[ $current_charge -lt 30 ]]; then
     echo -n '#[fg=colour196]'
 elif [[ $current_charge -lt 50 ]]; then
-    echo -n '#[fg=colour214]'
+    echo -n '#[fg=colour166]'
 elif [[ $current_charge -lt 70 ]]; then
-    echo -n '#[fg=colour11]'
+    echo -n '#[fg=colour214]'
 elif [[ $current_charge -lt 90 ]]; then
-    echo -n '#[fg=colour48]'
+    echo -n '#[fg=colour41]'
 else
-    echo -n '#[fg=colour10]'
+    echo -n '#[fg=colour40]'
 fi
 
 echo -n "$HEART $current_charge"
