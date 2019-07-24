@@ -24,12 +24,15 @@ source $ZSH/oh-my-zsh.sh
 ## Phil Davies
 ## May 21st, 2019
 
-## ZSH Theme 
+## ZSH Theme
 POWERLEVEL9K_MODE='nerdfont-complete'
 source  ~/.dotfiles/zsh/powerlevel9k/powerlevel9k.zsh-theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_SHORTEN_DELIMITER="*"
 
 ## Tmux config
 ## Tmux config in part from: https://blogs.technet.microsoft.com/jessicadeen/linux/macos-ohmyzsh-tmux-vim-iterm2-powerlevel9k-badass-terminal/
@@ -53,9 +56,12 @@ export PATH=$PATH:$GOPATH/bin
 alias sudo="sudo -E"
 alias mkdir="mkdir -pv"
 alias cls="clear"
+alias svup="spotify vol up"
+alias svdown="spotify vol down"
 
 #Phil's exports
 export KEYTIMEOUT=1
+export MAKEFLAGS=-j$(sysctl -n hw.ncpu)
 
 #Phil's custom settings
 #Set zsh in vi mode
@@ -76,3 +82,7 @@ if [[ `uname` == "Darwin" ]]; then
     export EDITOR='mvim -v'
   fi
 fi
+
+
+## Add thefuck support
+eval $(thefuck --alias)

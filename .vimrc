@@ -14,7 +14,10 @@ Plug 'itchyny/lightline.vim'
 Plug 'ap/vim-buftabline'
 
 " Code completion
-Plug 'valloric/youcompleteme'
+" Plug 'valloric/youcompleteme'
+
+" Smart auto-completer
+Plug 'zxqfl/tabnine-vim'
 
 " Code commenting
 Plug 'tpope/vim-commentary'
@@ -96,5 +99,4 @@ autocmd BufWrite * :call TrimWhite()
 
 
 " inoremaps go here
-inoremap { {<CR>}<Esc>ko
-inoremap ( ()<Esc>ba
+inoremap {<CR> {<CR>}<Esc>ko
