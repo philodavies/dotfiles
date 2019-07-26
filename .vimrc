@@ -37,7 +37,8 @@ set tabstop=4
 
 
 " Show line numbers by default --------------------------------------------
-set number
+set number relativenumber
+
 
 syntax on
 color slate
