@@ -51,6 +51,7 @@ fi
 ## GO configs
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export GO111MODULE=on
 
 #Phil's Aliases
 alias sudo="sudo -E"
@@ -58,6 +59,7 @@ alias mkdir="mkdir -pv"
 alias cls="clear"
 alias svup="spotify vol up"
 alias svdown="spotify vol down"
+alias gs="git status"
 
 #Phil's exports
 export KEYTIMEOUT=1
@@ -86,3 +88,15 @@ fi
 
 ## Add thefuck support
 eval $(thefuck --alias)
+
+## Add lastpass-cli aliases
+alias lplog="lpass login pdavies@cloudflare.com"
+alias lpssh="echo 'Copying SSH password from LP vault' && lpass show -cp privateKeyPass"
+alias lptac="echo 'Copying TACACS password from LP vault' && lpass show -cp tacacs+"
+
+## Add /usr/local/sbin to path
+# It's needed for mtr
+export PATH=$PATH:/usr/local/sbin
+
+## CF specific
+docklog() { docker login docker-registry.cfdata.org -u pdavies@cloudflare.com -p "$1" }

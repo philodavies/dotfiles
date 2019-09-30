@@ -25,6 +25,9 @@ Plug 'tpope/vim-commentary'
 " Golang plugin
 Plug 'fatih/vim-go'
 
+" Python3 formatting (Black)
+Plug 'psf/black'
+
 call plug#end()
 
 " tabs and indenting ------------------------------------------------------
@@ -38,6 +41,8 @@ set tabstop=4
 
 " Show line numbers by default --------------------------------------------
 set number relativenumber
+
+set scrolloff=5
 
 
 syntax on
@@ -72,6 +77,10 @@ let g:go_fmt_command = "goimports"
 let g:go_null_module_warning = 0
 
 
+" Set SQL options
+let g:omni_sql_no_default_maps = 1
+
+
 
 " Functions
 
@@ -89,6 +98,16 @@ function! TrimWhite()
   call cursor(l, c)
 endfunction
 
+" Function to enable/disable linenumbers
+function! ToggleNumbers(toggle)
+    if a:toggle == 1
+        set number relativenumber
+    elseif a:toggle == 0
+        set nonumber norelativenumber
+    else
+        echom "Not a valid input!"
+    endif
+endfunction
 
 
 
@@ -97,7 +116,11 @@ endfunction
 
 " Write to file but remove all trailing whitespace before saving
 autocmd BufWrite * :call TrimWhite()
+autocmd BufWrite *.py :Black
 
 
-" inoremaps go here
+" Maps
+
 inoremap {<CR> {<CR>}<Esc>ko
+nnoremap n nzz
+nnoremap N Nzz
