@@ -1,0 +1,8 @@
+[includeIf "gitdir:~/Git/cf-repos/"]
+    path = ~/Git/cf-repos/.gitconfig
+
+[includeIf "gitdir:~/Git/github/"]
+    path = ~/Git/github/.gitconfig
+
+[includeIf "gitdir:~/Git/personal_projects/"]
+    path = ~/Git/github/.gitconfig
