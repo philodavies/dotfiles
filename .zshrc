@@ -60,6 +60,7 @@ alias cls="clear"
 alias svup="spotify vol up"
 alias svdown="spotify vol down"
 alias gs="git status"
+alias xclear="pbcopy < /dev/null"
 
 #Phil's exports
 export KEYTIMEOUT=1
@@ -96,7 +97,10 @@ alias lptac="echo 'Copying TACACS password from LP vault' && lpass show -cp taca
 
 ## Add /usr/local/sbin to path
 # It's needed for mtr
-export PATH=$PATH:/usr/local/sbin
+#
+# Also add ~/.dotfiles/bin
+# for local scripts (like git-housekeep)
+export PATH=$PATH:/usr/local/sbin:~/.dotfiles/bin
 
 ## CF specific
 docklog() { docker login docker-registry.cfdata.org -u pdavies@cloudflare.com -p "$1" }

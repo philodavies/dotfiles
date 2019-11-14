@@ -28,6 +28,13 @@ Plug 'fatih/vim-go'
 " Python3 formatting (Black)
 Plug 'psf/black'
 
+" Sensible vim defaults
+Plug 'tpope/vim-sensible'
+
+" Markdown things
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 call plug#end()
 
 " tabs and indenting ------------------------------------------------------
@@ -37,6 +44,7 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+set list
 
 
 " Show line numbers by default --------------------------------------------
@@ -44,10 +52,18 @@ set number relativenumber
 
 set scrolloff=5
 
+" Spelling
+" autocmd FileType markdown setlocal spell
+set spell
+nnoremap <Leader>z mz[s1z=e`z
 
 syntax on
 color slate
 
+hi clear SpellBad
+hi SpellBad cterm=underline
+" Set style for gVim
+hi SpellBad gui=undercurl
 
 " Set escape key to be noticed immediately
 set ttimeoutlen=0
@@ -81,12 +97,14 @@ let g:go_null_module_warning = 0
 let g:omni_sql_no_default_maps = 1
 
 
-
 " Functions
 
 
 " Function to strip trailing whitespace and return to cursor location
 function! TrimWhite()
+  if &ft =~ 'ruby\|javascript\|perl\|markdown'
+        return
+  endif
   " Preparation: save last search, and cursor position.
   let _s=@/
   let l = line(".")
@@ -124,3 +142,11 @@ autocmd BufWrite *.py :Black
 inoremap {<CR> {<CR>}<Esc>ko
 nnoremap n nzz
 nnoremap N Nzz
+
+" noremap <silent> k gk
+" noremap <silent> j gj
+noremap <silent> 0 g0
+noremap <silent> $ g$
+
+nnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
