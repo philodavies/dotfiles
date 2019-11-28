@@ -27,7 +27,7 @@ source $ZSH/oh-my-zsh.sh
 ## ZSH Theme
 POWERLEVEL9K_MODE='nerdfont-complete'
 source  ~/.dotfiles/zsh/powerlevel9k/powerlevel9k.zsh-theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs newline status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
@@ -61,10 +61,12 @@ alias svup="spotify vol up"
 alias svdown="spotify vol down"
 alias gs="git status"
 alias xclear="pbcopy < /dev/null"
+alias ipy="ipython"
 
 #Phil's exports
 export KEYTIMEOUT=1
 export MAKEFLAGS=-j$(sysctl -n hw.ncpu)
+export GPG_TTY=$(tty)
 
 #Phil's custom settings
 #Set zsh in vi mode
@@ -104,3 +106,8 @@ export PATH=$PATH:/usr/local/sbin:~/.dotfiles/bin
 
 ## CF specific
 docklog() { docker login docker-registry.cfdata.org -u pdavies@cloudflare.com -p "$1" }
+
+function pretty_csv {
+    # column -t -s, -n "$@" | less
+    cat "$@" | sed 's/,/ ,/g' | column -t -s, | less -S
+}

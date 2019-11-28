@@ -53,7 +53,6 @@ set number relativenumber
 set scrolloff=5
 
 " Spelling
-" autocmd FileType markdown setlocal spell
 set spell
 nnoremap <Leader>z mz[s1z=e`z
 
@@ -61,9 +60,14 @@ syntax on
 color slate
 
 hi clear SpellBad
-hi SpellBad cterm=underline
-" Set style for gVim
-hi SpellBad gui=undercurl
+hi clear SpellCap
+hi clear SpellRare
+hi clear SpellLocal
+hi SpellBad cterm=underline ctermfg=DarkRed gui=undercurl guisp=DarkRed
+hi SpellCap cterm=underline ctermfg=DarkBlue gui=undercurl guisp=Blue
+hi SpellRare cterm=underline ctermfg=DarkMagenta gui=undercurl guisp=Magenta
+hi SpellLocal cterm=underline ctermfg=DarkCyan gui=undercurl guisp=Cyan
+hi Pmenu ctermbg=LightGrey
 
 " Set escape key to be noticed immediately
 set ttimeoutlen=0
@@ -88,9 +92,12 @@ nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
 
-" Set Golang auto options
+" Set Golang options
 let g:go_fmt_command = "goimports"
 let g:go_null_module_warning = 0
+
+" Set Python options
+let g:black_skip_string_normalization = 1
 
 
 " Set SQL options

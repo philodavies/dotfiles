@@ -1,0 +1,99 @@
+#!/bin/bash
+#
+# Perform git housekeeping.
+# https://stash.cfops.it/users/kerolasa/repos/myskel/raw/bin/git-housekeep?at=refs%2Fheads%2Fmaster
+#
+# Sami Kerola <kerolasa@cloudflare.com>
+
+# Default settings, do not touch.
+SCRIPT_INVOCATION_SHORT_NAME="${0##*/}"
+set -e
+# trap ERR is bashism, do not change shebang!
+trap 'echo "${SCRIPT_INVOCATION_SHORT_NAME}: exit on error in line $LINENO"; exit 1' ERR
+set -u
+set -o pipefail
+
+msg() {
+	echo "${SCRIPT_INVOCATION_SHORT_NAME}: ${*}"
+}
+
+usage() {
+	echo "Usage:"
+	echo " ${0} [-a] [-h]"
+	echo ""
+	echo " -l             clean local reflog"
+	echo " -m             delete merged branches"
+	echo " -r             prune remote branches"
+	echo " -u <remote>    skip <remote> repository (if unreachable or etc)"
+	echo " -e             perform expensive repack (almost never needed)"
+	echo " -h             display this help and exit"
+	exit "${1}"
+}
+
+MERGED=false
+REMOTE=false
+LOCAL=false
+EXPENSIVE=false
+UNRECHABLE=''
+while getopts elmru:h OPTIONS; do
+	case ${OPTIONS} in
+		e)
+			EXPENSIVE=true
+			;;
+		h)
+			usage 0
+			;;
+		r)
+			REMOTE=true
+			;;
+		u)
+			UNRECHABLE=$OPTARG
+			;;
+		l)
+			LOCAL=true
+			;;
+		m)
+			MERGED=true
+			;;
+		*)
+			usage 1
+			;;
+	esac
+done
+
+if ! ${MERGED} &&  ! ${REMOTE} && ! ${LOCAL} && ! ${EXPENSIVE}; then
+	msg "nothing requsted, use -h for help"
+	exit 1
+fi
+
+if ${MERGED}; then
+	for I in $(git branch --merged | grep -Ev '^(\*|\ ) master$'); do
+		git branch -d "$I"
+	done
+fi
+if ${REMOTE} || ${EXPENSIVE}; then
+	for I in $(git remote); do
+		if [ "x$I" = "x$UNRECHABLE" ]; then
+			continue
+		fi
+		echo "pruning: ${I}"
+		git remote prune "${I}"
+	done
+fi
+if git count-objects -v | awk '/^count:/ {if ($2 == 0) {exit 0} else {exit 1}}'; then
+	# nothing to repack
+	exit 0
+fi
+if ${LOCAL} || ${EXPENSIVE}; then
+	git reflog expire --all
+	git prune --expire=now
+	git gc --prune=now
+fi
+if ${EXPENSIVE}; then
+	git repack -a -f -F -d --window=256 --depth=256
+else
+	git repack -A -d
+fi
+
+exit 0
+# EOF
