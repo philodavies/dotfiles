@@ -1,8 +1,6 @@
 " This is Philippe Davies' vimrc
 " Version 0.4
 
-
-
 " Plugins ------------------------------------------------------------------
 
 call plug#begin('~/.vim/plugged')
@@ -13,20 +11,11 @@ Plug 'itchyny/lightline.vim'
 " Vim Tabs?
 Plug 'ap/vim-buftabline'
 
-" Code completion
-" Plug 'valloric/youcompleteme'
-
-" Smart auto-completer
-Plug 'zxqfl/tabnine-vim'
-
 " Code commenting
 Plug 'tpope/vim-commentary'
 
 " Golang plugin
 Plug 'fatih/vim-go'
-
-" Python3 formatting (Black)
-Plug 'psf/black'
 
 " Sensible vim defaults
 Plug 'tpope/vim-sensible'
@@ -34,6 +23,13 @@ Plug 'tpope/vim-sensible'
 " Markdown things
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+
+" Things not needed at FB :(
+" Code completion
+" Plug 'valloric/youcompleteme'
+
+" Python3 formatting (Black)
+" Plug 'psf/black'
 
 call plug#end()
 
@@ -124,14 +120,8 @@ function! TrimWhite()
 endfunction
 
 " Function to enable/disable linenumbers
-function! ToggleNumbers(toggle)
-    if a:toggle == 1
-        set number relativenumber
-    elseif a:toggle == 0
-        set nonumber norelativenumber
-    else
-        echom "Not a valid input!"
-    endif
+function! ToggleNumbers()
+    set invnumber invrelativenumber
 endfunction
 
 
@@ -141,7 +131,7 @@ endfunction
 
 " Write to file but remove all trailing whitespace before saving
 autocmd BufWrite * :call TrimWhite()
-autocmd BufWrite *.py :Black
+" autocmd BufWrite *.py :Black
 
 
 " Maps
@@ -150,8 +140,6 @@ inoremap {<CR> {<CR>}<Esc>ko
 nnoremap n nzz
 nnoremap N Nzz
 
-" noremap <silent> k gk
-" noremap <silent> j gj
 noremap <silent> 0 g0
 noremap <silent> $ g$
 
