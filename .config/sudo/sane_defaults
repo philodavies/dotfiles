@@ -1,0 +1,7 @@
+# Show asterisks as password is typed
+Defaults env_reset,pwfeedback,insults
+
+#Allow wheel group to run sudo commands
+%wheel ALL=(ALL) ALL
+
+#Command aliases

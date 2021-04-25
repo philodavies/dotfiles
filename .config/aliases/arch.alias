@@ -1,0 +1,5 @@
+alias pacin="sudo pacman -S"   # install
+alias pacup="sudo pacman -Syu" # update
+alias pacrm="sudo pacman -Rns" # remove
+alias pacclean="sudo paccache -r && sudo pacman -Qtdq | pacrm - "
+

@@ -3,7 +3,7 @@
 
 " Plugins ------------------------------------------------------------------
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Visual Plugins
 Plug 'itchyny/lightline.vim'
@@ -23,6 +23,9 @@ Plug 'tpope/vim-sensible'
 " Markdown things
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+
+" LaTeX plugin
+Plug 'lervag/vimtex'
 
 " Things not needed at FB :(
 " Code completion

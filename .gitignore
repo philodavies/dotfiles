@@ -1,0 +1,10 @@
+.cache
+.local/share
+.mozilla
+Documents
+Downloads
+Git
+Pictures
+.config/nvim/plugged
+.config/nvim/shada
+.config/nvim/autoload

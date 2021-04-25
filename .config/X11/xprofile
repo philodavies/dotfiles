@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Load zsh env
+[ -f ~/.config/zsh/.zshenv ] && source ~/.config/zsh/.zshenv
+
+
+
+dunst &                     # dunst for notifications
+setbg &                     # Set the background with the setbg script
+xcompmgr &                  # xcompmgr for transparency

@@ -1,0 +1,44 @@
+#!/bin/env bash
+
+pgrep i3lock > /dev/null && exit 0
+
+lock() {
+
+  BG=$XDG_DATA_HOME/bg
+  B='#00000000'  # blank
+  C='#ffffff22'  # clear-ish
+  D='#ff00ffcc'  # default
+  T='#ee00eeee'  # text
+  W='#880000bb'  # wrong
+  V='#bb00bbbb'  # verifying
+
+  i3lock \
+    --bshlcolor=$W \
+    --clock \
+    --datecolor=$T \
+    --datepos="tx+24:ty+25" \
+    --datestr "Type password to unlock" \
+    --indicator \
+    --indpos="x+270:h-120" \
+    --insidecolor=$C \
+    --insidevercolor=$V \
+    --insidewrongcolor=$W \
+    --keyhlcolor=$W \
+    --line-uses-inside \
+    --radius=20 \
+    --ring-width=3 \
+    --ringcolor=$V \
+    --ringvercolor=$V \
+    --ringwrongcolor=$W \
+    --separatorcolor=$D \
+    --timecolor=$T \
+    --timepos="x+120:h-115" \
+    --veriftext="" \
+    --wrongtext="" \
+    -i $BG \
+    -n \
+    -e
+}
+
+lock &
+

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+alias cls="clear"
+alias config="/usr/bin/git --git-dir=$HOME/Git/.cfg --work-tree=$HOME"
+alias cp="cp -iv"
+alias dcp="docker-compose"
+alias ip="ip -c"
+alias ipadd="ip -br addr"
+alias ll="ls -l"
+alias ls="ls --group-directories-first"
+alias mkdir="mkdir -pv"
+alias mv="mv -iv"
+alias rm="rm -vI"
+# alias sudo="sudo -E"
+alias vi="vim"
+alias venv="python -m venv .venv"
+alias vactivate="source .venv/bin/activate"
+alias xclear="pbcopy < /dev/null"
+
+# Use neovim if available
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Arch configs
+[ -f  /etc/arch-release ] && source $XDG_CONFIG_HOME/aliases/arch.alias
+
+## FB configurations
+if [[ $(hostname -d) == *.facebook.com ]]; then
+  alias arcl="arc lint"
+  alias cdcode="cd ~/fbsource/fbcode"
+  alias ipy="bento console"
+else
+  alias ipy="ipython"
+fi
+
+## Ruby things
+if [ -x "$(command -v colorls)" ]; then
+  alias ls="colorls"
+else
+  alias ls="ls -hN --color=auto --group-directories-first"
+fi
