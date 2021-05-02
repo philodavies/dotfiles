@@ -4,3 +4,6 @@
           -c color.grep.match=\"reverse yellow\" \
           grep --break --heading --line-number
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[user]
+	email = 40214783+philodavies@users.noreply.github.com
+	name = Phil
