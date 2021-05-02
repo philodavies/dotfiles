@@ -306,13 +306,13 @@ menu-2-1-exec = menu-open-0
 
 [module/packages]
 type = custom/script
-exec = $XDG_DATA_HOME/polybar-scripts/updates-pacman-aurhelper.sh
+exec = ~/.local/bin/polybar-scripts/updates-pacman-aurhelper.sh
 interval = 600
 format-underline = #5ac18e
 
 [module/weather]
 type = custom/script
-exec = $XDG_DATA_HOME/polybar-scripts/openweathermap.sh
+exec = ~/.local/bin/polybar-scripts/openweathermap.sh
 interval = 600
 label-font = 5
 format-underline = #407294
