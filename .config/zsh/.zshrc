@@ -24,7 +24,6 @@ function pretty_csv {
 
 hash pkgfile && source /usr/share/doc/pkgfile/command-not-found.zsh
 
-## Stuff from Luke Smith
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
