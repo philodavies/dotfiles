@@ -4,16 +4,9 @@
 
 ### SETUP ###
 name=$1
-repo=$2
 
 ### THE ACTUAL SCRIPT ###
-# Install dotfiles
-alias config="sudo -u git --git-dir="/home/$name/Git/.cfg/" --work-tree="/home/$name"
-sudo -u "$name" mkdir -p "/home/$name/Git/"
-config clone --bare "$repo" "/home/$name/Git/.cfg"
-config checkout
-
-# Load default sudo
+# Load default sudo and lock root account
 cp "/home/$name/.config/sudo/01_sane_defaults" /etc/sudoers.d/
 passwd -l root
 
