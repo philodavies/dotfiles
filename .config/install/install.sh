@@ -14,3 +14,7 @@ passwd -l root
 cp "/home/$name/.config/lightdm/lightdm.conf" /etc/lightdm/
 cp "/home/$name/.config/lightdm/lightdm-webkit2-greeter.conf" /etc/lightdm/
 systemctl enable lightdm
+
+# Install vim-plug
+curl -fLo /home/"$name"/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.github.com/junegunn/vim-plug/master/plug.vim
