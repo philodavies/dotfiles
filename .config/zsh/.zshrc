@@ -13,6 +13,7 @@ stty start undef  # Disable Ctrl-q from resuming terminal
 
 bindkey -v #Set zsh to vi mode
 bindkey '^R' history-incremental-search-backward #Reverse search
+bindkey '^A' vi-beginning-of-line #Go to line start
 
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
